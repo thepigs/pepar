@@ -1,0 +1,29 @@
+#include <errno.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+#include <exception>
+
+class dev_exception : std::exception
+{
+	static string _
+public:
+	dev_exception(int errno);
+
+}
+
+class dev
+{
+	private:
+	int fd;
+	protected:
+	void dev_ioctl();
+	dev(const char* dev,int mode) throw (dev_exception)
+	{
+		fd = open(dev, mode);
+		if (fd==-1)
+			throw dev_exception(errno);
+	}
+}

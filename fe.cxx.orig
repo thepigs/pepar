@@ -1,0 +1,57 @@
+#include "fe.h"
+#include <stdlib.h>
+
+using namespace std;
+
+template<class T> void row(ostream& os,const char* k, T v)
+{
+ os << "  <tr><td>" << k <<  "</td><td>" << v << "</td></tr>\n";
+}
+
+const char* types[]={"FE_QPSK(DVB-S)","FE_QAM(DVB-C)","FE_OFDM(DVB-T)"};
+
+
+
+
+#define ROWUI(N) row<uint32_t>(os,#N,dfi.N);
+void  fe::get_info(ostream& os)
+{
+	struct dvb_frontend_info dfi = raw_get_info();
+	os << "<table>\n";
+	row<const char*>(os,"name",dfi.name);
+	row<const char*>(os,"type",dfi.type<=2?types[dfi.type]:"Unknown");
+	ROWUI(frequency_min);
+	ROWUI(frequency_max);
+	ROWUI(frequency_stepsize);
+	ROWUI(frequency_tolerance);
+	ROWUI(symbol_rate_min);
+	ROWUI(symbol_rate_max);
+	ROWUI(symbol_rate_tolerance);
+	ROWUI(notifier_delay);
+       CAP(FE_IS_STUPID)
+       CAP( FE_CAN_INVERSION_AUTO
+       CAP( FE_CAN_FEC_1_2 )           
+       CAP( FE_CAN_FEC_2_3 )           
+       CAP( FE_CAN_FEC_3_4 )               
+       CAP( FE_CAN_FEC_4_5 )               
+       CAP( FE_CAN_FEC_5_6 )               
+       CAP( FE_CAN_FEC_6_7 )               
+       CAP( FE_CAN_FEC_7_8 )               
+       CAP( FE_CAN_FEC_8_9 )               
+       CAP( FE_CAN_FEC_AUTO)               
+       CAP( FE_CAN_QPSK  )                 
+       CAP( FE_CAN_QAM_16 )                
+       CAP( FE_CAN_QAM_32 )                
+       CAP( FE_CAN_QAM_64 )                
+       CAP( FE_CAN_QAM_128 )               
+       CAP( FE_CAN_QAM_256  )              
+       CAP( FE_CAN_QAM_AUTO)               
+       CAP( FE_CAN_TRANSMISSION_MODE_AUTO) 
+       CAP( FE_CAN_BANDWIDTH_AUTO      )   
+       CAP( FE_CAN_GUARD_INTERVAL_AUTO)    
+       CAP( FE_CAN_HIERARCHY_AUTO )        
+       CAP( FE_CAN_MUTE_TS      )          
+       CAP( FE_CAN_CLEAN_SETUP )           
+	os << "</table>\n";
+}
+

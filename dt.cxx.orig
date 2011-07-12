@@ -1,0 +1,14 @@
+#include "fe.h"
+#include <iostream>
+int main(int argc, char* argv[])
+{
+	try{
+	fe fe("/dev/test",O_RDONLY);	
+	}catch(bt_error& e)
+	{
+		std::cout<<e.what()<<std::endl;
+		std::cout<<e.trace()<<std::endl;
+	}
+}
+
+

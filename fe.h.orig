@@ -1,0 +1,8 @@
+#include "dev.h"
+class fe : public dev
+{
+	private:
+	 int fd;
+	public:
+	 fe(const char* devname,int mode) : dev(devname,mode){}
+};

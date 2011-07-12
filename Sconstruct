@@ -1,0 +1,8 @@
+Program('dt',[Glob('*.cxx'),
+	Glob('soap/*.cpp')],
+	CPPPATH=['.','soap'],
+	LINKFLAGS='-rdynamic',
+	LIBS=['gsoap++'],
+	CCFLAGS='-Wall -Os',
+	CXXFILESUFFIX=['.cpp','.nsmap']
+	)

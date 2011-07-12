@@ -1,0 +1,26 @@
+#include <errno.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <string>
+#include "bt.h"
+#include <stdexcept>
+
+class dev_error : public bt_error
+{
+private:
+	static std::string _err(int err);
+		
+public:
+	dev_error(const std::string& s,const char* file, int line) : bt_error(s,file,line){}
+	dev_error(const int err, const char* file, int line) : bt_error(_err(err),file,line){}
+};
+
+class dev
+{
+	private:
+	int fd;
+	protected:
+	void dev_ioctl();
+	dev(const char* dev,int mode) throw (dev_error);
+};

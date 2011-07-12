@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="urn:pepar:fe"
+	xmlns:intf="urn:pepar:fe">
+
+ 
+
+ <simpleType name="fe_type_t">
+  		<restriction base="xs:string">
+      			<enumeration value="FE_QPSK"></enumeration>
+      			<enumeration value="FE_QAM"></enumeration>
+      			<enumeration value="FE_OFDM"></enumeration>
+      			<enumeration value="FE_ATSC"></enumeration>
+    		</restriction>
+ </simpleType>
+
+ <simpleType name="fe_status_t">
+	<list>
+	    <simpleType>
+  		<restriction base="xs:string">
+      			<enumeration value="FE_HAS_SIGNAL"></enumeration>
+      			<enumeration value="FE_HAS_CARRIER"></enumeration>
+      			<enumeration value="FE_HAS_VITERBI"></enumeration>
+      			<enumeration value="FE_HAS_SYNC"></enumeration>
+      			<enumeration value="FE_HAS_LOCK"></enumeration>
+      			<enumeration value="FE_TIMEDOUT"></enumeration>
+      			<enumeration value="FE_REINIT"></enumeration>
+    		</restriction>
+	    </simpleType>
+	</list> 
+</simpleType>
+
+ <simpleType name="fe_caps_t">
+	<list>
+	    <simpleType>
+  		<restriction base="xs:string">
+      			<enumeration value="FE_IS_STUPID"></enumeration>
+      			<enumeration value="FE_CAN_INVERSION_AUTO"></enumeration>
+      			<enumeration value="FE_CAN_FEC_1_2"></enumeration>
+      			<enumeration value="FE_CAN_FEC_2_3"></enumeration>
+      			<enumeration value="FE_CAN_FEC_3_4"></enumeration>
+      			<enumeration value="FE_CAN_FEC_4_5"></enumeration>
+      			<enumeration value="FE_CAN_FEC_5_6"></enumeration>
+      			<enumeration value="FE_CAN_FEC_6_7"></enumeration>
+      			<enumeration value="FE_CAN_FEC_7_8"></enumeration>
+      			<enumeration value="FE_CAN_FEC_8_9"></enumeration>
+      			<enumeration value="FE_CAN_FEC_AUTO"></enumeration>
+      			<enumeration value="FE_CAN_QPSK"></enumeration>
+      			<enumeration value="FE_CAN_QAM_16"></enumeration>
+      			<enumeration value="FE_CAN_QAM_32"></enumeration>
+      			<enumeration value="FE_CAN_QAM_64"></enumeration>
+      			<enumeration value="FE_CAN_QAM_128"></enumeration>
+      			<enumeration value="FE_CAN_QAM_256"></enumeration>
+      			<enumeration value="FE_CAN_QAM_AUTO"></enumeration>
+      			<enumeration value="FE_CAN_TRANSMISSION_MODE_AUTO"></enumeration>
+      			<enumeration value="FE_CAN_BANDWIDTH_AUTO"></enumeration>
+      			<enumeration value="FE_CAN_GUARD_INTERVAL_AUTO"></enumeration>
+      			<enumeration value="FE_CAN_HIERARCHY_AUTO"></enumeration>
+      			<enumeration value="FE_CAN_8VSB"></enumeration>
+      			<enumeration value="FE_CAN_16VSB"></enumeration>
+      			<enumeration value="FE_HAS_EXTENDED_CAPS"></enumeration>
+      			<enumeration value="FE_CAN_2G_MODULATION"></enumeration>
+      			<enumeration value="FE_NEEDS_BENDING"></enumeration>
+      			<enumeration value="FE_CAN_RECOVER"></enumeration>
+     			<enumeration value="FE_CAN_MUTE_TS"></enumeration>
+    		</restriction>
+	    </simpleType>
+	</list> 
+</simpleType>
+ 
+ <element name="dvb_frontend_parameters">
+  <complexType>
+   <sequence 
+ 
+ <element name="dvb_frontend_info">
+  <complexType>
+    <sequence>
+        <element name="name" type="xs:string"/>
+	<element name="type" type="intf:fe_type_t"/>
+	<element name="frequency_min" type="xs:unsignedInteger"/>
+	<element name="frequency_max" type="xs:unsignedInteger"/>
+	<element name="frequency_stepsize" type="xs:unsignedInteger"/>
+	<element name="frequency_tolerance" type="xs:unsignedInteger"/>
+	<element name="symbol_rate_min" type="xs:unsignedInteger"/>
+	<element name="symbol_rate_max" type="xs:unsignedInteger"/>
+	<element name="symbol_rate_tolerance" type="xs:unsignedInteger"/>
+	<element name="notifier_delay" type="xs:unsignedInteger"/>
+	<element name="caps" type="intf:fe_caps_t"/>
+     </sequence>
+   </complexType>
+  </element>
+
+  <element name="fe_status">
+	<complexType>
+		<sequence>
+			<element name="status" type="intf:fe_status_t"/>
+		</sequence>
+	</complexType>
+  </element>
+
+
+</schema>
+

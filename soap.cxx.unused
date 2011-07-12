@@ -1,0 +1,15 @@
+#include "soap.h"
+//static serialize
+
+template<class T> void gsoap::serialize(std::ostream& os, T& t)
+{
+	t.soap=&soap;
+	t.soap->os=os;
+	soap_set_omode(&soap, SOAP_XML_GRAPH);       
+	t.serialize(&soap); 
+	soap_begin_send(&soap);
+	t.put(&soap,"o",NULL);
+	soap_end_send(&soap);
+}
+
+

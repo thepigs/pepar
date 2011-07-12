@@ -1,0 +1,19 @@
+#include "dev.h"
+#include <string.h>
+#include <sstream>
+std::string dev_error::_err(int err)
+{
+	char buf[64];
+	char* r=strerror_r(errno,buf,sizeof(buf));
+	if(NULL==r)
+	        return std::string(buf);
+        return std::string(r);
+}
+
+dev::dev(const char* dev,int mode) throw (dev_error)
+{
+	fd = open(dev, mode);
+        if (fd==-1)
+        	THROW(dev_error,errno);
+}
+
